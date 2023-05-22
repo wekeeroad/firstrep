@@ -1,3 +1,0 @@
-# readinfo
-
-## section 1
