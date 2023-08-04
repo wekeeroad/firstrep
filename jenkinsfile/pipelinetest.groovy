@@ -9,8 +9,8 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Hello world'
-        echo ${env.ENVTEST}
-        echo ${ENVTEST}
+        echo "${env.ENVTEST}"
+        echo "${ENVTEST}"
       }
       post {
         always {
