@@ -25,6 +25,7 @@ pipeline {
         SS_TEST = 'This is a env test at stage'
       }
       steps {
+        echo "${env.ENVTEST}"
         echo "${env.EE_TEST}"
         echo "${env.SS_TEST}"
       }
