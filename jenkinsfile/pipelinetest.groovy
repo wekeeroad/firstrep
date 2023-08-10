@@ -23,7 +23,6 @@ pipeline {
         echo "${env.BRANCH_NAME}"
         echo "${env.BUILD_URL}"
         echo "${env.GIT_BRANCH}"
-        sh "printenv"
       }
     }
     stage('environment_test') {
@@ -41,7 +40,8 @@ pipeline {
         echo 'Hello world'
         echo "${env.ENVTEST}"
         echo "${ENVTEST}"
-        sh "go --version"
+        sh "go version"
+        sh "go build"
       }
       post {
         always {
