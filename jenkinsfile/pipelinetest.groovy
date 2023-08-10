@@ -9,6 +9,11 @@ pipeline {
 
   environment {
     EE_TEST = 'This is a env test at pipeline'
+    GOPATH = '/home/ubuntu/go_test'
+  }
+
+  tools {
+    go 'go1.21.0'
   }
   
   stages {
@@ -18,6 +23,7 @@ pipeline {
         echo "${env.BRANCH_NAME}"
         echo "${env.BUILD_URL}"
         echo "${env.GIT_BRANCH}"
+        sh "printenv"
       }
     }
     stage('environment_test') {
@@ -35,6 +41,7 @@ pipeline {
         echo 'Hello world'
         echo "${env.ENVTEST}"
         echo "${ENVTEST}"
+        sh "go --version"
       }
       post {
         always {
