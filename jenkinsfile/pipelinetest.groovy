@@ -6,6 +6,14 @@ pipeline {
     timeout(time: 10, unit: 'HOURS')
   }
   stages {
+    stage('environment') {
+      steps {
+        echo "${env.BUILD_NUMBER}" 
+        echo "${env.BRANCH_NAME}"
+        echo "${env.BUILD_URL}"
+        echo "${env.GIT_BRANCH}"
+      }
+    }
     stage('Build') {
       steps {
         echo 'Hello world'
