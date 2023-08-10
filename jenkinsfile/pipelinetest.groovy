@@ -21,10 +21,10 @@ pipeline {
       }
     }
     stage('environment_test') {
+      environment {
+        SS_TEST = 'This is a env test at stage'
+      }
       steps {
-        environment {
-          SS_TEST = 'This is a env test at stage'
-        }
         echo "${env.EE_TEST}"
         echo "${env.SS_TEST}"
       }
