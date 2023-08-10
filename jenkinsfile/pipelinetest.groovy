@@ -1,17 +1,32 @@
 pipeline {
   agent any
+  
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', daysToKeepStr: '3'))
     retry(3)
     timeout(time: 10, unit: 'HOURS')
   }
+
+  environment {
+    EE_TEST = 'This is a env test at pipeline'
+  }
+  
   stages {
-    stage('environment') {
+    stage('environment_orig') {
       steps {
         echo "${env.BUILD_NUMBER}" 
         echo "${env.BRANCH_NAME}"
         echo "${env.BUILD_URL}"
         echo "${env.GIT_BRANCH}"
+      }
+    }
+    stage('environment_test') {
+      steps {
+        environment {
+          SS_TEST = 'This is a env test at stage'
+        }
+        echo "${env.EE_TEST}"
+        echo "${env.SS_TEST}"
       }
     }
     stage('Build') {
