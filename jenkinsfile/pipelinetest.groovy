@@ -40,7 +40,9 @@ pipeline {
         echo 'Hello world'
         echo "${env.ENVTEST}"
         echo "${ENVTEST}"
-        sh "go version"
+        dir('/home/ubuntu/go_test') {
+          sh "go run hello_world.go"
+        }
       }
       post {
         always {
