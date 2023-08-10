@@ -41,7 +41,6 @@ pipeline {
         echo "${env.ENVTEST}"
         echo "${ENVTEST}"
         sh "go version"
-        sh "go build"
       }
       post {
         always {
