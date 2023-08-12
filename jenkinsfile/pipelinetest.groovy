@@ -1,10 +1,10 @@
 pipeline {
   agent any
 
-  triggers {
+  /*triggers {
     cron('*/2 * * * *')
   }
-  
+  */
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', daysToKeepStr: '3'))
     retry(3)
