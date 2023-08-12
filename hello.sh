@@ -1,2 +1,2 @@
-echo "hello world!!!!!"
-echo "test gate commit"
+echo "hello world!!!"
+echo "gate validate"
