@@ -14,6 +14,7 @@ pipeline {
         echo "${env.BRANCH_NAME}"
         echo "${env.BUILD_URL}"
         echo "${env.GIT_BRANCH}"
+        echo "test jenkins github trigger"
       }
     }
   post {
