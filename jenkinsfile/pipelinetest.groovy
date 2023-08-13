@@ -52,7 +52,6 @@ pipeline {
         echo "${params.ifBuild}"
         echo "${params.textOpenSource}"
         echo "${params.choiceBuildType}"
-        echo "${params.passwordOfRepo}"
       }
     }
     stage('Build') {
