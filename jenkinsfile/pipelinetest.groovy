@@ -15,6 +15,14 @@ pipeline {
     GOPATH = '/home/ubuntu/go_test'
   }
 
+  parameters {
+    string(name: "branch", defaultValue: "master", description: "The branch of target repo")
+    booleanParam(name: "ifBuild", defaultValue: true, description: "Ensure if build")
+    text(name: "textOpenSource", defaultValue: "", description: "Type in information about open source")
+    choice(name: "choiceBuildType", choices: "gate\release", defaultValue: "release", description: "Select the type of build")
+    password(name: "passwordOfRepo", defaultValue: "secret", description: "Type in the password to download repo")
+  }
+  
   tools {
     go 'go1.21.0'
   }
@@ -36,6 +44,15 @@ pipeline {
         echo "${env.ENVTEST}"
         echo "${env.EE_TEST}"
         echo "${env.SS_TEST}"
+      }
+    }
+    stage('params') {
+      steps {
+        echo "${params.branch}"
+        echo "${params.ifBuild}"
+        echo "${params.textOpenSource}"
+        echo "${params.choiceBuildType}"
+        echo "${params.passwordOfRepo}"
       }
     }
     stage('Build') {
