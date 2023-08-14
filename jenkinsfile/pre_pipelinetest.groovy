@@ -38,7 +38,7 @@ pipeline {
       }
       steps {
         echo "build for gate"
-        ehco "approval by ${approvalMap['APPROVER']}"
+        echo "approval by ${approvalMap['APPROVER']}"
         build(
           job: "release_test",
           parameters: [
@@ -55,7 +55,7 @@ pipeline {
       }
       steps {
         echo "build for release"
-        ehco "approval by ${approvalMap['APPROVER']}"
+        echo "approval by ${approvalMap['APPROVER']}"
         build(
           job: "release_test",
           parameters: [
