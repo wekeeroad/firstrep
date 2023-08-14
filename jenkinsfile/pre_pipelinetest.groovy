@@ -5,11 +5,33 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '10', daysToKeepStr: '3'))
   }
 
+  environment {
+    approvalMap = ''
+  }
+
   parameters {
     choice(name: "choiceBuildType", choices: "gate\nrelease", description: "Select the type of build")
   }
-
+  
   stages {
+    stage('input parameters') {
+      steps {
+        timeout(time: 1, unit: 'MINUTES') {
+          script {
+            approvalMap = input(
+              message: 'Type in some parameters',
+              ok: 'Confirm',
+              parameters: [
+                string(name: "branch", defaultValue: "master", description: "The branch of target repo"),
+                booleanParam(name: "ifBuild", defaultValue: true, description: "Ensure if build")
+              ],
+              submitter: 'weikelu',
+              submitterParameter: 'APPROVER'
+            )
+          }
+        }
+      }
+    }
     stage('build gate') {
       when {
         expression { return params.choiceBuildType == "gate" }
@@ -19,7 +41,9 @@ pipeline {
         build(
           job: "release_test",
           parameters: [
-            string(name: "choiceBuildType", value: "${params.choiceBuildType}")
+            string(name: "choiceBuildType", value: "${params.choiceBuildType}"),
+            string(name: "branch", value: "${params.branch}"),
+            booleanParam(name: "ifBuild", value: ${params.ifBuild})
           ]
         )
       }
@@ -34,6 +58,8 @@ pipeline {
           job: "release_test",
           parameters: [
             string(name: "choiceBuildType", value: "${params.choiceBuildType}")
+            string(name: "branch", value: "${params.branch}"),
+            booleanParam(name: "ifBuild", value: ${params.ifBuild})
           ]
         )
       }
