@@ -56,12 +56,14 @@ pipeline {
       steps {
         echo "build for release"
         echo "approval by ${approvalMap['APPROVER']}"
+        echo "branch is ${approvalMap['branch']}"
+        echo "ifBuild is ${approvalMap['ifBuild']}"
         build(
           job: "release_test",
           parameters: [
-            string(name: "choiceBuildType", value: "${params.choiceBuildType}"),
-            string(name: "branch", value: ${approvalMap['branch']}),
-            booleanParam(name: "ifBuild", value: ${approvalMap['ifBuild']})
+            string(name: "branch", value: "${approvalMap['branch']}"),
+            booleanParam(name: "ifBuild", value: ${approvalMap['ifBuild']}),
+            string(name: "choiceBuildType", value: "${params.choiceBuildType}")
           ]
         )
       }
