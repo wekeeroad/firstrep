@@ -38,12 +38,13 @@ pipeline {
       }
       steps {
         echo "build for gate"
+        ehco "approval by ${approvalMap['APPROVER']}"
         build(
           job: "release_test",
           parameters: [
             string(name: "choiceBuildType", value: "${params.choiceBuildType}"),
-            string(name: "branch", value: "${params.branch}"),
-            booleanParam(name: "ifBuild", value: ${params.ifBuild})
+            string(name: "branch", value: "${approvalMap['branch']}"),
+            booleanParam(name: "ifBuild", value: ${approvalMap['ifBuild']})
           ]
         )
       }
@@ -54,12 +55,13 @@ pipeline {
       }
       steps {
         echo "build for release"
+        ehco "approval by ${approvalMap['APPROVER']}"
         build(
           job: "release_test",
           parameters: [
             string(name: "choiceBuildType", value: "${params.choiceBuildType}")
-            string(name: "branch", value: "${params.branch}"),
-            booleanParam(name: "ifBuild", value: ${params.ifBuild})
+            string(name: "branch", value: "${approvalMap['branch']}"),
+            booleanParam(name: "ifBuild", value: ${approvalMap['ifBuild']})
           ]
         )
       }
