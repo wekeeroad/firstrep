@@ -64,8 +64,9 @@ pipeline {
         }
       }
       post {
-        always {
+        success {
           sh "echo 'stage Build finish!'"
+          archiveArtifacts artifacts: '/home/ubuntu/go_test/*.go', fingerprint: true
         }
       }
     } 
