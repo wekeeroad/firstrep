@@ -61,12 +61,13 @@ pipeline {
         echo "${ENVTEST}"
         dir('/home/ubuntu/go_test') {
           sh "go run hello_world.go"
+          sh "cp -rp *.go ${env.WORKSPACE}"
         }
       }
       post {
         success {
           sh "echo 'stage Build finish!'"
-          archiveArtifacts artifacts: '/home/ubuntu/go_test/*.go', fingerprint: true
+          archiveArtifacts artifacts: '*.go', fingerprint: true
         }
       }
     } 
