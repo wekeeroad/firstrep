@@ -71,6 +71,14 @@ pipeline {
         }
       }
     } 
+    stage('Release') {
+      steps {
+        script {
+          def version = VersionNumber versionPrefix: "${JOB_NAME}-", versionNumberString: 'v1.1.1.${BUILD DATE FORMATTED}'
+          echo "version: ${version}"
+        }
+      }
+    }
   }
   post {
     changed {
