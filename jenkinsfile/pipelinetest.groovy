@@ -61,7 +61,7 @@ pipeline {
         echo "${ENVTEST}"
         dir('/home/ubuntu/go_test') {
           sh "go run hello_world.go"
-          sh "cp -rp *.go ${env.WORKSPACE}"
+          sh "cp -rp *.go ${env.WORKSPACE}/"
         }
       }
       post {
