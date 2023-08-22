@@ -6,7 +6,7 @@ pipeline {
   //}
   options {
     buildDiscarder(logRotator(numToKeepStr: '10', daysToKeepStr: '3'))
-    retry(3)
+    // retry(3)
     timeout(time: 10, unit: 'HOURS')
   }
 
@@ -70,7 +70,13 @@ pipeline {
           archiveArtifacts artifacts: '*.go', fingerprint: true
         }
       }
-    } 
+    }
+    stage('deploy') {
+      steps {
+        echo "{env.WORKSPACE}"
+        sh "ls ${env.WORKSPACE}"
+      }
+    }
     stage('Release') {
       steps {
         script {
