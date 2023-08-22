@@ -1,0 +1,5 @@
+---
+- host: example
+  tasks:
+  - name: example test
+    debug: msg="{{ lookup('env', 'BUILD_TAG') }}"
