@@ -75,6 +75,11 @@ pipeline {
       steps {
         echo "{env.WORKSPACE}"
         sh "ls ${env.WORKSPACE}"
+        ansiblePlaybook(
+          playbook: "${env.WORKSPACE}/ansible/playbook.yaml",
+          inventory: "${env.WORKSPACE}/ansible/hosts",
+          credentialsId: "ansible_ubuntu"
+        )
       }
     }
     stage('Release') {
